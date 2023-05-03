@@ -30,7 +30,7 @@ body {
   
   .form input[type="text"],
   .form input[type="email"],
-  .form input[type="mdp"] {
+  .form input[type="password"] {
     border: 1px solid #000000; /*bord des cases*/
     border-radius: 100px; /*modifier la forme des cases pour les arrondis*/
     font-size: 16px;
