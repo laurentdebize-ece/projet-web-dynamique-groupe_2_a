@@ -1,10 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Ma page d'acceuil</title>
+	<title>OmnesMySkills</title>
 	<style>
-		body {
-			background-color: #013A89; /* Couleur de fond de la page */
+		body { /*fond d'écran pour l'acceuil*/
+			background-image: url('../image/ecoleece.jpg');
+			background-size: cover;
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			margin: 0;
+			padding: 0;
+			font-family: sans-serif;
+		}
+
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 40px;
+			background-color: rgba(255, 255, 255, 0.8);
+			box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            text-align: center;
+		}
+
+		h1 {
+			font-size: 3rem;
+			color: #067692;
+			margin-top: 0;
+		}
+
+		p {
+			font-size: 1.5rem;
+			color: #000000;
+			line-height: 1.5;
+			margin-bottom: 2rem;
+		}
+
+		a {
+			display: inline-block;
+			background-color: #067692;
+			color: #ffffff;
+			padding: 10px 20px;
+			border-radius: 5px;
+			text-decoration: none;
+			font-size: 1.2rem;
+			margin-top: 2rem;
+			transition: background-color 0.3s ease-in-out;
+		}
+
+		a:hover {
+			background-color: #9a9a9a;
+		}
+
+        body  {             /*debut du pied de page*/
+			margin: 0;
+			padding: 0;
+			font-family: sans-serif;
+		}
+
+		.container  {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 11px;
+		}
+
+		footer {
+			background-color: #373739;
+			color: #ffffff;
+			padding: 20px;
+			text-align: center;
+            position: fixed;
+			bottom: 0;
+			width: 100%;
+		}
+
+		.footer-links {
+			display: flex;
+			justify-content: center;
+			margin-bottom: 10px;
+		}
+
+		.footer-link {
+			color: #ffffff;
+			text-decoration: none;
+			margin: 0 20px;
+			font-size: 0.8rem;
+			transition: color 0.3s ease-in-out;
+		}
+
+		.footer-link:hover {
+			color: #ffffff;
+		}
+
+		.footer-info {
+			margin-bottom: 10px;
+		}
+
+		.footer-info p {
+			font-size: 0.8rem;
+			margin: 0;
 		}
 		/* Style pour le menu déroulant */
 		.dropdown {
@@ -21,8 +115,8 @@
 			background-color: transparent;
 			color: #333;
 			border: none;
-			padding: 10px;
-			font-size: 16px;
+			padding: 7px;
+			font-size: 10px;
 			cursor: pointer;
 			outline: none;
 		}
@@ -60,7 +154,7 @@
 			display: flex;
 			align-items: center;
 			margin: 10px;
-			background-color: #ffffff; /* Couleur de fond de la barre de déconnexion */
+			background-color: #fbfbfb92; /* Couleur de fond de la barre de déconnexion */
 			padding: 10px;
 			border-radius: 5px;
 		}
@@ -102,29 +196,28 @@
 	</style>
 </head>
 <body>
-	<!-- Barre de déconnexion -->
-	<div class="logout">
+	<div class="logout">  <!--page quand on appuit sur le boutton déconnexion-->
 		<img src="../image/profil.jpg" alt="Mon profil">
 		<a href="connexion.html">Deconnexion</a>
 	</div>
-	<!-- Menu déroulant -->
-	<div class="dropdown">
+	
+	<div class="dropdown"><!-- Menu déroulant ATTENTION IL VA FALLOIR REGLER LE PROBLEME DE COULEUR -->
 		<button><img src="../image/menu.jpg" alt="Menu"></button>
 		<div class="dropdown-content">
-			<a href="Acceuil.html">Acceuil</a>
+			<a href="test acceuil.html">Acceuil</a>
 			<a href="matieres.html">Matieres</a>
 			<a href="Competence.html">Mes competences</a>
 			<a href="#">Toutes competences</a>
 		</div>
 	</div>
-	<img src="../image/logo2.png" alt="Image de l'école d'ingénieurs">
+	<img src="logo2.png" alt="Image de l'école d'ingénieurs">
 
 	
 
 	<h1>Ecole Centrale d'Electronique Lyon</h1>
 	<br></br>
 	<p>L'ecole d'ingenieurs de l'ECE Lyon est une institution de renommee mondiale qui offre une formation de pointe dans les domaines de l'informatique et de l'electronique. Depuis sa fondation en 1919, elle s'est engagee a former des ingenieurs hautement qualifies, capables de relever les defis les plus complexes de notre epoque.</p>
-	<img src="../image/ecoleece.jpg" alt="Image de l'école d'ingénieurs">
+	<img src="ecoleece.jpg" alt="Image de l'école d'ingénieurs">
 	<br></br>
 	
 
@@ -132,4 +225,8 @@
 	<b></b>
 	<p>En plus de l'excellence académique, l'école d'ingénieurs [nom de l'école] encourage également l'engagement civique et la responsabilité sociale. Nous sommes fiers de notre communauté d'étudiants et d'anciens élèves qui ont apporté des contributions significatives à la société à travers leurs travaux dans des domaines tels que [exemples de contributions].</p>
 </body>
+<footer>
+	<p>Ceci est mon pied de page.</p>
+	<p>Tous droits réservés &copy; 2023</p>
+  </footer>
 </html>
