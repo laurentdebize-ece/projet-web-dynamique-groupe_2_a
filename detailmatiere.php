@@ -63,10 +63,21 @@ while ($data = mysqli_fetch_assoc($result)){
 }
 if ($_SESSION['statut'] == "admin"){
     if (isset($_POST["supprimer_mat"])){
+        $sql = "DELETE FROM groupematiere WHERE ID_mat LIKE '$ID_mat'";
+        $result = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM competence WHERE ID_mat LIKE '$ID_mat'";
+        $result = mysqli_query($conn, $sql);
+        while ($data = mysqli_fetch_assoc($result)){
+            $ID_comp_supp = $data['ID_comp'];
+            $sql2 = "DELETE FROM evaluation WHERE ID_comp LIKE '$ID_comp_supp'";
+            $result2 = mysqli_query($conn, $sql2);
+            $sql2 = "DELETE FROM competence WHERE ID_comp LIKE '$ID_comp_supp'";
+            $result2 = mysqli_query($conn, $sql2);
+        }
         $sql = "DELETE FROM matiere WHERE ID_mat LIKE '$ID_mat'";
         $result = mysqli_query($conn, $sql);
-        $sql = "DELETE FROM matiere WHERE ID_mat LIKE '$ID_mat'";
-        $result = mysqli_query($conn, $sql);
+        header("Location: matieres.php");
+        die();
     }
 }
 require("blocs/redirection.php");
