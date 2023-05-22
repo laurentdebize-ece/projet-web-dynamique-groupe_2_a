@@ -1,12 +1,3 @@
-<?php
-session_start();
-if (isset($_SESSION['ID_ut']) && isset($_SESSION['statut'])){
-    header("Location: accueil.php");
-    die();
-}
-require("config.php");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
