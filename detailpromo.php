@@ -42,7 +42,7 @@ $result = mysqli_query($conn, $sql);
 while ($data = mysqli_fetch_assoc($result)){
     if (isset($_POST[$data['ID_grp']])){
         $_SESSION['ID_grp'] = $data['ID_grp'];
-        $_SESSION['nom_comp'] = $data['nom'];
+        $_SESSION['nom_grp'] = $data['nom'];
         header("Location: detailcompetence.php");
         die();
     }
