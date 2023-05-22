@@ -23,7 +23,18 @@ require("blocs/config.php");
 </head>
 <body>
     <?php require("blocs/header.php"); ?>
+    
+    <?php
+    if ($_SESSION['statut'] == "admin"){ ?>
+        <br><div>
+            <form method="post" action="">
+                <input type="submit" name="supprimer_mat" value="Supprimer">
+            </form>
+        </div>
+    <?php } ?>
+
     <div><br><?php echo $_SESSION['nom_mat'] ?><br><br></div>
+
     <div>
         <?php
         $sql = "SELECT * FROM competence WHERE ID_mat LIKE $ID_mat";
@@ -48,6 +59,14 @@ while ($data = mysqli_fetch_assoc($result)){
         $_SESSION['nom_comp'] = $data['nom'];
         header("Location: detailcompetence.php");
         die();
+    }
+}
+if ($_SESSION['statut'] == "admin"){
+    if (isset($_POST["supprimer_mat"])){
+        $sql = "DELETE FROM matiere WHERE ID_mat LIKE '$ID_mat'";
+        $result = mysqli_query($conn, $sql);
+        $sql = "DELETE FROM matiere WHERE ID_mat LIKE '$ID_mat'";
+        $result = mysqli_query($conn, $sql);
     }
 }
 require("blocs/redirection.php");
