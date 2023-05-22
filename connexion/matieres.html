@@ -2,25 +2,24 @@
 <html>
     <meta charset="UTF-8">
 <head>
-	<title>Mes matieres</title>
+	<title>OmnesMySkills</title>
 	<style>
-        /* Style pour le menu déroulant */
-		.dropdown {
+        .dropdown {
 			position: absolute;
 			top: 0;
 			left: 0;
 			display: inline-block;
-			margin: 10px;
+			margin: 5px;
 			background-color: #fff; /* Couleur de fond du menu */
-			box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-			border-radius: 5px;
+			/*box-shadow: 0 2px 5px rgba(0,0,0,0.1);*/
+			/*border-radius: 5px;*/
 		}
 		.dropdown button {
 			background-color: transparent;
 			color: #333;
 			border: none;
-			padding: 10px;
-			font-size: 16px;
+			padding: 7px;
+			font-size: 10px;
 			cursor: pointer;
 			outline: none;
 		}
@@ -32,8 +31,8 @@
 			z-index: 1;
 			min-width: 160px;
 			background-color: #fff; /* Couleur de fond du menu déroulant */
-			box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-			border-radius: 5px;
+			/*box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+			border-radius: 5px;*/
 		}
 		.dropdown-content a {
 			color: #333;
@@ -44,8 +43,8 @@
 			font-size: 16px;
 			border-bottom: 1px solid #ccc;
 		}
-		.dropdown-content a:active {
-			background-color: #e1e1e1; /* Couleur de fond du thème sélectionné */
+        .dropdown-content a:active {
+			background-color: #ffffff; /* Couleur de fond du thème sélectionné */
 		}
 		.dropdown:hover .dropdown-content {
 			display: block;
@@ -77,30 +76,38 @@
 			margin-right: 10px;
 		}
 		body {
-			background-color: #6D7CAA; /* Couleur de fond de la page */
-			font-family: Arial, sans-serif; /* Police de caractères */
+			background-image: url('../image/imagesOmnesMatieres.jpg');
+			background-size: cover;
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			margin: 0;
+			padding: 0;
+			font-family: sans-serif;
+			font-family: Century, sans-serif; /* Police de caractères */
 			color: #333; /* Couleur du texte */
 			line-height: 1.5; /* Hauteur de ligne */
-		}
-		h1 {
-			font-size: 24px; /* Taille du titre */
-			margin: 20px 0; /* Marge autour du titre */
-			text-align: center; /* Alignement du titre */
-		}
-		p {
-			font-size: 16px; /* Taille du texte */
-			margin: 20px; /* Marge autour du texte */
-			text-align: justify; /* Justification du texte */
 		}
 		.container {
 			overflow: hidden;
 			width: 500px;
 			margin: 0 auto;
 		}
+		body {
+ 			height: 100%;
+		}
+
+		.carrousel-wrapper {
+ 		 	display: flex;
+  			justify-content: center;
+ 		 	align-items: center;
+  			height: 100%;	
+		}	
 
 		.slider {
-			display: flex;
-			transition: transform 0.5s ease;
+ 			 position: relative;
+  			display: flex;
+			transition: transform 2s ease;
 			height: 300px;
 		}
 
@@ -116,7 +123,7 @@
 			position: absolute;
 			top: 50%;
 			transform: translateY(-50%);
-			width: 30px;
+			width: 50px;
 			height: 30px;
 			background-color: gray;
 			color: white;
@@ -133,10 +140,10 @@
 			right: 0;
 		}
         #slider {
-  width: 500px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   overflow: hidden;
-  position: relative;
+  position: center;
   margin: 0 auto;
 }
 
@@ -145,14 +152,14 @@
       top: 0;
       left: 0;
       opacity: 0;
-      transition: opacity 0.5s ease-in-out;
+      transition: opacity 2s ease-in-out;
     }
     #slider img.active {
       opacity: 1;
     }
     #slider nav {
       position: absolute;
-      bottom: 20px;
+      bottom: 0px;
       left: 50%;
       transform: translateX(-50%);
     }
@@ -161,7 +168,7 @@
       height: 10px;
       border-radius: 50%;
       background-color: #ccc;
-      margin: 0 5px;
+      margin: 0 2px;
       border: none;
       cursor: pointer;
     }
@@ -187,11 +194,8 @@
 		</div>
 	</div>
     <body>
-        <h1>Mes Matieres</h1>
-	<p>.</p>
-	<p>.</p>
-	<p>.</p>
-        <div id="slider">
+	<div class="carrousel-wrapper">
+		<div id="slider">
           <a href="MatieresMaths.html"><img class="active" src="../image/maths.png" alt="Maths"></a>
           <a href="MatieresPhysique.html"><img src="../image/physique.png" alt="Physique"></a>
           <a href="MatieresElectronique.html"><img src="../image/electronique.png" alt="Electronique"></a>
@@ -232,5 +236,6 @@
             changeImage(nextImage);
           }, 5000);
         </script>
-      </body>
-      </html>
+    </div>
+	</body>
+</html>
