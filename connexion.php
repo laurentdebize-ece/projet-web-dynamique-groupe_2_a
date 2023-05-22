@@ -1,3 +1,15 @@
+<<<<<<<<< Temporary merge branch 1
+<?php
+session_start();
+if (isset($_SESSION['ID_ut']) && isset($_SESSION['statut'])){
+    header("Location: accueil.php");
+    die();
+}
+require("config.php");
+?>
+
+=========
+>>>>>>>>> Temporary merge branch 2
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,5 +56,3 @@
     ?>
 </body>
 </html>
-
-<?php mysqli_close($conn); ?>

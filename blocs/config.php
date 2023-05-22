@@ -5,13 +5,11 @@ if ($_SERVER['REQUEST_URI'] == "/projet%20local/config.php") {
 }
 $servername = "localhost";
 $username = "root";
+<<<<<<<<< Temporary merge branch 1
+$password = "";
+=========
 $password = "root";
+>>>>>>>>> Temporary merge branch 2
 $dbname = "omnesmyskills";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
-
-if (!$conn){
-    session_destroy();
-    die("ERREUR : impossible de se connecter");
-}
-?>
