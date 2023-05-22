@@ -32,7 +32,9 @@ require("blocs/config.php");
                 <br><br>
                 Ajouter un groupe :<br>
                 <select name="choix_ajt_grp">
-                    <?php  ?>
+                    <?php
+                    $sql = "SELECT * FROM groupe WHERE ID_mat LIKE $ID_mat";
+                    ?>
                     <option value="choix1">Choix 1</option>
                     <option value="choix2">Choix 2</option>
                 </select>
