@@ -1,6 +1,11 @@
-<?php require("verification.php"); require("config.php"); ?>
+<?php
+require("blocs/verificationsession.php");
+require("blocs/verificationstatutadmin.php");
+require("blocs/config.php");
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,9 +13,9 @@
     <title>Document</title>
 </head>
 <body>
-    <?php require("header.php"); ?>
+    <?php require("blocs/header.php"); ?>
     <div>Enseignants<br><?php echo "id_ut : " . $_SESSION['ID_ut'] . "<br>statut : " . $_SESSION['statut'] ?></div>
 </body>
 </html>
 
-<?php require("redirection.php"); mysqli_close($conn); ?>
+<?php require("blocs/redirection.php"); mysqli_close($conn); ?>

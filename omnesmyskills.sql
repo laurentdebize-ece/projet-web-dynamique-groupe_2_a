@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 15 mai 2023 à 09:30
+-- Généré le : lun. 22 mai 2023 à 11:18
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `administrateur` (
   `prenom` varchar(255) NOT NULL,
   PRIMARY KEY (`ID_admin`),
   KEY `FK_ADMIN_UT` (`ID_ut`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `administrateur`
@@ -73,6 +73,21 @@ INSERT INTO `competence` (`ID_comp`, `ID_mat`, `nom`) VALUES
 (7, 3, 'Condensateur'),
 (8, 3, 'Dipole electrostatique'),
 (9, 3, 'Dipole magnetique');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `detailevaluation`
+--
+
+DROP TABLE IF EXISTS `detailevaluation`;
+CREATE TABLE IF NOT EXISTS `detailevaluation` (
+  `ID_eval` int(11) NOT NULL,
+  `note` int(3) NOT NULL,
+  `confirme` varchar(3) NOT NULL,
+  `commentaire` text NOT NULL,
+  KEY `FK_DETEVAL_EVAL` (`ID_eval`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -142,10 +157,10 @@ CREATE TABLE IF NOT EXISTS `etudiant` (
 --
 
 INSERT INTO `etudiant` (`ID_etu`, `ID_ut`, `nom`, `prenom`) VALUES
-(2, 2, 'Amaury', 'Merlin'),
-(6, 6, 'Yannis', 'Soliveres'),
-(7, 7, 'Remi', 'Imbert'),
-(8, 8, 'Florian', 'Sanchez');
+(2, 2, 'Merlin', 'Amaury'),
+(6, 6, 'Soliveres', 'Yannis'),
+(7, 7, 'Imbert', 'Remi'),
+(8, 8, 'Sanchez', 'Florian');
 
 -- --------------------------------------------------------
 
@@ -155,12 +170,32 @@ INSERT INTO `etudiant` (`ID_etu`, `ID_ut`, `nom`, `prenom`) VALUES
 
 DROP TABLE IF EXISTS `evaluation`;
 CREATE TABLE IF NOT EXISTS `evaluation` (
+  `ID_eval` int(11) NOT NULL AUTO_INCREMENT,
   `ID_etu` int(11) NOT NULL,
   `ID_comp` int(11) NOT NULL,
-  `note` int(3) NOT NULL,
+  `deja_evaluee` varchar(3) NOT NULL,
+  PRIMARY KEY (`ID_eval`),
   KEY `FK_EVAL_ETU` (`ID_etu`),
   KEY `FK_EVAL_COMP` (`ID_comp`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `evaluation`
+--
+
+INSERT INTO `evaluation` (`ID_eval`, `ID_etu`, `ID_comp`, `deja_evaluee`) VALUES
+(1, 6, 1, 'non'),
+(2, 6, 2, 'non'),
+(3, 6, 3, 'non'),
+(4, 7, 1, 'non'),
+(5, 7, 2, 'non'),
+(6, 7, 3, 'non'),
+(7, 8, 1, 'non'),
+(8, 8, 2, 'non'),
+(9, 8, 3, 'non'),
+(10, 2, 1, 'non'),
+(11, 2, 2, 'non'),
+(12, 2, 3, 'non');
 
 -- --------------------------------------------------------
 
@@ -205,10 +240,11 @@ CREATE TABLE IF NOT EXISTS `groupeetudiant` (
 --
 
 INSERT INTO `groupeetudiant` (`ID_etu`, `ID_grp`) VALUES
-(2, 2),
-(6, 2),
 (7, 2),
-(8, 2);
+(8, 2),
+(2, 2),
+(2, 3),
+(6, 2);
 
 -- --------------------------------------------------------
 
@@ -231,9 +267,7 @@ CREATE TABLE IF NOT EXISTS `groupematiere` (
 INSERT INTO `groupematiere` (`ID_grp`, `ID_mat`) VALUES
 (1, 1),
 (1, 2),
-(2, 3),
-(2, 1),
-(2, 2);
+(2, 1);
 
 -- --------------------------------------------------------
 
@@ -273,7 +307,7 @@ CREATE TABLE IF NOT EXISTS `promo` (
   `fin` int(4) NOT NULL,
   PRIMARY KEY (`ID_promo`),
   KEY `FK_PROMO_ECOLE` (`ID_ecole`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `promo`
@@ -282,7 +316,8 @@ CREATE TABLE IF NOT EXISTS `promo` (
 INSERT INTO `promo` (`ID_promo`, `ID_ecole`, `nom`, `fin`) VALUES
 (1, 1, 'ING2', 2026),
 (2, 1, 'ING1', 2027),
-(3, 1, 'ING3', 2025);
+(3, 1, 'ING3', 2025),
+(4, 1, 'Pas de promo', 0);
 
 -- --------------------------------------------------------
 
@@ -305,13 +340,13 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 
 INSERT INTO `utilisateur` (`ID_ut`, `mail`, `mdp`, `statut`) VALUES
 (1, '1@edu.ece.fr', 'abc123', 'admin'),
-(2, '2@edu.ece.fr', 'abc123', 'eleve'),
+(2, '2@edu.ece.fr', 'abc123', 'etu'),
 (3, '3@edu.ece.fr', 'abc123', 'ens'),
 (4, '4@edu.ece.fr', 'abc123', 'ens'),
 (5, '5@edu.ece.fr', 'abc123', 'ens'),
-(6, '6@edu.ece.fr', 'abc123', 'eleve'),
-(7, '7@edu.ece.fr', 'abc123', 'eleve'),
-(8, '8@edu.ece.fr', 'abc123', 'eleve');
+(6, '6@edu.ece.fr', 'abc123', 'etu'),
+(7, '7@edu.ece.fr', 'abc123', 'etu'),
+(8, '8@edu.ece.fr', 'abc123', 'etu');
 
 --
 -- Contraintes pour les tables déchargées
@@ -328,6 +363,12 @@ ALTER TABLE `administrateur`
 --
 ALTER TABLE `competence`
   ADD CONSTRAINT `FK_COMP_MAT` FOREIGN KEY (`ID_mat`) REFERENCES `matiere` (`ID_mat`);
+
+--
+-- Contraintes pour la table `detailevaluation`
+--
+ALTER TABLE `detailevaluation`
+  ADD CONSTRAINT `FK_DETEVAL_EVAL` FOREIGN KEY (`ID_eval`) REFERENCES `evaluation` (`ID_eval`);
 
 --
 -- Contraintes pour la table `enseignant`

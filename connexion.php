@@ -1,5 +1,14 @@
+<?php
+session_start();
+if (isset($_SESSION['ID_ut']) && isset($_SESSION['statut'])){
+    header("Location: accueil.php");
+    die();
+}
+require("blocs/config.php");
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,11 +27,10 @@
         //on recupere mail et mdp du formulaire
         $mail = (isset($_POST["mail"])? $_POST["mail"] : "");
         $mdp = (isset($_POST["mdp"])? $_POST["mdp"] : "");
-        $sql = "SELECT * FROM utilisateur";
 
         if (($mail != "")&&($mdp != "")) {
             //on definit la requete sql
-            $sql .= " WHERE mail LIKE '$mail' AND mdp LIKE '$mdp'";
+            $sql = "SELECT * FROM utilisateur WHERE mail LIKE '$mail' AND mdp LIKE '$mdp'";
             $result = mysqli_query($conn, $sql);
             //on regarde s'il y a un resultat
             if (mysqli_num_rows($result) == 1){
