@@ -1,8 +1,8 @@
 <?php
 // Connexion à la base de données
 $servername = "localhost";
-$username = "votre_nom_utilisateur";
-$password = "votre_mot_de_passe";
+$username = "root";
+$password = "YES";
 $dbname = "omnesmyskills";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
