@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_URI'] == "/projet%20local/config.php") {
 }
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "root";
 $dbname = "omnesmyskills";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
