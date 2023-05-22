@@ -28,7 +28,15 @@ require("blocs/config.php");
     if ($_SESSION['statut'] == "admin"){ ?>
         <br><div>
             <form method="post" action="">
-                <input type="submit" name="supprimer_mat" value="Supprimer">
+                <input type="submit" name="supprimer_mat" value="Supprimer la matière">
+                <br><br>
+                Ajouter un groupe :<br>
+                <select name="choix_ajt_grp">
+                    <?php  ?>
+                    <option value="choix1">Choix 1</option>
+                    <option value="choix2">Choix 2</option>
+                </select>
+                <input type="submit" name="ajouter_grp" value="Ajouter le groupe">
             </form>
         </div>
     <?php } ?>
@@ -36,6 +44,23 @@ require("blocs/config.php");
     <div><br><?php echo $_SESSION['nom_mat'] ?><br><br></div>
 
     <div>
+        <?php
+        $sql = "SELECT * FROM groupematiere WHERE ID_mat LIKE $ID_mat";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result)){?>
+            <form method="post" action="">
+            <?php while ($data = mysqli_fetch_assoc($result)){
+                $ID_grp = $data['ID_grp'];
+                $sql2 = "SELECT * FROM groupe WHERE ID_grp LIKE '$ID_grp'";
+                $result2 = mysqli_query($conn, $sql2);
+                $data2 = mysqli_fetch_assoc($result2) ?>
+            <input type="submit" name="<?php echo "grp" . $data['ID_grp'] ?>" value="<?php echo $data2['nom'] ?>"><br>
+            <?php } ?>
+            </form>
+        <?php } else { echo "Aucun groupe.<br>"; } ?>
+    </div>
+
+    <div><br>
         <?php
         $sql = "SELECT * FROM competence WHERE ID_mat LIKE $ID_mat";
         $result = mysqli_query($conn, $sql);
@@ -51,6 +76,21 @@ require("blocs/config.php");
 </html>
 
 <?php
+$sql = "SELECT * FROM groupematiere WHERE ID_mat LIKE $ID_mat";
+$result = mysqli_query($conn, $sql);
+while ($data = mysqli_fetch_assoc($result)){
+    if (isset($_POST["grp" . $data['ID_grp']])){
+        $ID_grp = $data['ID_grp'];
+        $sql2 = "SELECT * FROM groupe WHERE ID_grp LIKE '$ID_grp'";
+        $result2 = mysqli_query($conn, $sql2);
+        $data2 = mysqli_fetch_assoc($result2);
+        $_SESSION['ID_grp'] = $data['ID_grp'];
+        $_SESSION['nom_grp'] = $data2['nom'];
+        header("Location: detailgroupe.php");
+        die();
+    }
+}
+
 $sql = "SELECT * FROM competence WHERE ID_mat LIKE $ID_mat";
 $result = mysqli_query($conn, $sql);
 while ($data = mysqli_fetch_assoc($result)){
@@ -61,6 +101,7 @@ while ($data = mysqli_fetch_assoc($result)){
         die();
     }
 }
+
 if ($_SESSION['statut'] == "admin"){
     if (isset($_POST["supprimer_mat"])){
         $sql = "DELETE FROM groupematiere WHERE ID_mat LIKE '$ID_mat'";
