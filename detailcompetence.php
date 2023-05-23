@@ -21,10 +21,11 @@ require("blocs/config.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="detailcompetence.css">
 </head>
 <body>
     <?php require("blocs/header.php"); ?>
-    <br><div><?php echo $_SESSION['nom_comp'] ?></div>
+    <div class="container"><h1><?php echo $_SESSION['nom_comp'] ?></h1></div>
     
     <?php
     if ($_SESSION['statut'] == "etu"){

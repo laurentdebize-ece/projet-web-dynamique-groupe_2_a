@@ -17,10 +17,11 @@ require("blocs/config.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="detailgroupe.css">
 </head>
 <body>
     <?php require("blocs/header.php"); ?>
-    <div><br><?php echo $_SESSION['nom_grp'] ?><br><br></div>
+    <div><h1><?php echo $_SESSION['nom_grp'] ?></h1></div>
     <div>
         <?php
         $sql = "SELECT * FROM groupeetudiant WHERE ID_grp LIKE $ID_grp";
@@ -33,7 +34,7 @@ require("blocs/config.php");
                 $result2 = mysqli_query($conn, $sql2);
                 if (mysqli_num_rows($result)){
                     $data2 = mysqli_fetch_assoc($result2); ?>
-                    <input type="submit" name="<?php echo $data['ID_etu'] ?>" value="<?php echo $data2['prenom'] . " " . $data2['nom'] ?>"><br>
+                    <input type="submit" class="prenom" name="<?php echo $data['ID_etu'] ?>" value="<?php echo $data2['prenom'] . " " . $data2['nom'] ?>"><br>
                 <?php }
             } ?>
             </form>

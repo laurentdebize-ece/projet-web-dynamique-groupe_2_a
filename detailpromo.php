@@ -17,21 +17,24 @@ require("blocs/config.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="pagedebase.css">
 </head>
 <body>
     <?php require("blocs/header.php"); ?>
-    <div><br><?php echo $_SESSION['nom_promo'] ?><br><br></div>
+    <div><h1><?php echo $_SESSION['nom_promo'] ?></h1></div>
     <div>
-        <?php
-        $sql = "SELECT * FROM groupe WHERE ID_promo LIKE $ID_promo";
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result)){?>
-            <form method="post" action="">
-            <?php while ($data = mysqli_fetch_assoc($result)){ ?>
-            <input type="submit" name="<?php echo $data['ID_grp'] ?>" value="<?php echo $data['nom'] ?>"><br>
-            <?php } ?>
-            </form>
-        <?php } else { echo "Aucun groupe.<br>"; } ?>
+        <div class="Promos">
+            <?php
+            $sql = "SELECT * FROM groupe WHERE ID_promo LIKE $ID_promo";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result)){?>
+                <form method="post" action="">
+                <?php while ($data = mysqli_fetch_assoc($result)){ ?>
+                <input type="submit" class="detailpromo"name="<?php echo $data['ID_grp'] ?>" value="<?php echo $data['nom'] ?>"><br>
+                <?php } ?>
+                </form>
+            <?php } else { echo "Aucun groupe.<br>"; } ?>
+        </div>
     </div>
 </body>
 </html>
