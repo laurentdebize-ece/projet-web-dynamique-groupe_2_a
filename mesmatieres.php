@@ -38,10 +38,13 @@ if ($_SESSION['statut'] == "ens"){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="mesmatieres.css">
 </head>
 <body>
     <?php require("blocs/header.php"); ?>
-    <div><br>Mes matières<br><br></div>
+    <div class="container">
+        <h1>Mes matières</h1>
+        <div class="Nom">
     <div>
         <?php
         //echo mysqli_num_rows($result);
@@ -49,7 +52,7 @@ if ($_SESSION['statut'] == "ens"){
             if (mysqli_num_rows($result)){ ?>
                 <form method="post" action="">
                     <?php while ($data = mysqli_fetch_assoc($result)){ ?>
-                    <input type="submit" name="<?php echo $data['ID_mat'] ?>" value="<?php echo $data['nom'] ?>"><br>
+                    <input type="submit" class="nom" name="<?php echo $data['ID_mat'] ?>" value="<?php echo $data['nom'] ?>"><br>
                     <?php } ?>
                 </form>
             <?php } else { echo "Aucune matière.<br>"; }
@@ -59,11 +62,12 @@ if ($_SESSION['statut'] == "ens"){
                 $sql = "SELECT * FROM matiere WHERE ID_mat LIKE $valeur";
                 $result = mysqli_query($conn, $sql);
                 $data = mysqli_fetch_assoc($result) ?>
-                <input type="submit" name="<?php echo $valeur ?>" value="<?php echo $data['nom'] ?>"><br>
+                <input type="submit" class="nom" name="<?php echo $valeur ?>" value="<?php echo $data['nom'] ?>"><br>
             <?php } ?>
             </form>
         <?php } else { echo "Aucune matière.<br>"; }
         ?>
+    </div>
     </div>
 </body>
 </html>

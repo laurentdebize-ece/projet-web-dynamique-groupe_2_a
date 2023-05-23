@@ -35,33 +35,36 @@ if(isset($_POST["confirmer_mat"])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="detailenseignant.css">
 </head>
 <body>
     <?php require("blocs/header.php"); ?>
-    <div><br>
-        Nom : <?php echo $_SESSION['nom_ens'] ?><br>
-        Prénom : <?php echo $_SESSION['prenom_ens'] ?><br><br>
-    </div>
-    <div>
-        Ajouter une matière :<br>
-        <form method="post" action="">
-            <input type="text" name="nv_mat">
-            <input type="submit" name="confirmer_mat" value="Confirmer">
-        </form>
-        <?php echo $erreur_mat; ?>
-    </div><br>
-    <div>
-        Liste des matières :<br>
-        <?php
-        $sql = "SELECT * FROM matiere WHERE ID_ens LIKE $ID_ens";
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result)){ ?>
-            <form method="post" action=""><?php
-            while ($data = mysqli_fetch_assoc($result)){ ?>
-                <input type="submit" name="<?php echo $data['ID_mat'] ?>" value="<?php echo $data['nom'] ?>"><br>
-            <?php } ?>
+    <div class="container">
+    <br>
+        <div class=nom>
+            Nom : <?php echo $_SESSION['nom_ens'] ?><br>
+            Prénom : <?php echo $_SESSION['prenom_ens'] ?><br><br>
+        </div>
+        <div class="ajout-matiere">
+            Ajouter une matière :<br>
+            <form method="post" action="">
+                <input type="text" class="ajout-matiere1" name="nv_mat">
+                <input type="submit" class="ajout-matiere" name="confirmer_mat" value="Confirmer">
             </form>
-        <?php } ?>
+            <?php echo $erreur_mat; ?>
+        </div><br>
+            Liste des matières :<br>
+            <?php
+            $sql = "SELECT * FROM matiere WHERE ID_ens LIKE $ID_ens";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result)){ ?>
+                <form method="post" action=""><?php
+                    while ($data = mysqli_fetch_assoc($result)){ ?>
+                        <input type="submit" class="matiere"name="<?php echo $data['ID_mat'] ?>" value="<?php echo $data['nom'] ?>"><br>
+                    <?php } ?>
+                </form>
+            <?php } ?>
+        </div>
     </div>
 </body>
 </html>

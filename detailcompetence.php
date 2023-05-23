@@ -12,28 +12,6 @@ if (isset($_SESSION['ID_comp']) && isset($_SESSION['nom_comp'])){
     die();
 }
 require("blocs/config.php");
-$erreur_eval = "";
-
-if (isset($_POST["confirmer_eval"])){
-    if (isset($_POST["eval"])){
-        $sql = "SELECT * FROM evaluation WHERE ID_etu LIKE '$ID_ut' AND ID_comp LIKE '$ID_comp'";
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result) == 1){
-            $note = "";
-            switch ($_POST["eval"]) {
-                case "comp_na": $note = "na" ; break;
-                case "comp_eca": $note = "eca" ; break;
-                case "comp_a": $note = "a" ; break;
-            }
-            if ($note != ""){
-                $sql = "UPDATE evaluation SET deja_evaluee = 'oui', note = '$note', confirme = 'non' WHERE ID_etu LIKE '$ID_ut' AND ID_comp LIKE '$ID_comp'";
-                $result = mysqli_query($conn, $sql);
-                header("Location: detailcompetence.php");
-                die();
-            }
-        }
-    } else { $erreur_eval = "Saisissez une evaluation<br>"; }
-}
 ?>
 
 <!DOCTYPE html>
@@ -43,10 +21,11 @@ if (isset($_POST["confirmer_eval"])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="detailcompetence.css">
 </head>
 <body>
     <?php require("blocs/header.php"); ?>
-    <br><div><?php echo $_SESSION['nom_comp'] ?></div>
+    <div class="container"><h1><?php echo $_SESSION['nom_comp'] ?></h1></div>
     
     <?php
     if ($_SESSION['statut'] == "etu"){

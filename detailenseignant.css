@@ -1,0 +1,27 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .nom {
+    margin-bottom: 20px;
+  }
+  
+  .ajout-matiere {
+    padding: 5px 10px;
+    color: black;
+    border: none;
+    cursor: pointer;
+  }
+  
+  
+  .matiere {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  
