@@ -1,56 +1,60 @@
 <?php
+
 session_start();
 if (isset($_SESSION['ID_ut']) && isset($_SESSION['statut'])){
     header("Location: accueil.php");
-    die();
+    die();      
 }
 require("blocs/config.php");
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Page de connexion</title>
+    <link rel="stylesheet" type="text/css" href="connexion.css">
 </head>
 <body>
-    <form method="post" action="">
-        Connexion<br>
-        E-mail : <input type="email" name="mail"><br>
-        Mot de passe : <input type="password" name="mdp"><br>
-        <input type="submit" name="se_connecter" value="Se connecter"><br>
-    </form>
-    <?php
-    if(isset($_POST["se_connecter"])){
-        //on recupere mail et mdp du formulaire
-        $mail = (isset($_POST["mail"])? $_POST["mail"] : "");
-        $mdp = (isset($_POST["mdp"])? $_POST["mdp"] : "");
+    <div class="container">
+        <h2>Connexion</h2>
+        <form method="post" action="">
+            <label for="mail">E-mail :</label>
+            <input type="email" id="mail" name="mail">
+            <label for="mdp">Mot de passe :</label>
+            <input type="password" id="mdp" name="mdp">
+            <input type="submit" name="se_connecter" value="Se connecter">
+        </form>
+        <?php
+        if(isset($_POST["se_connecter"])){
+            //on recupere mail et mdp du formulaire
+            $mail = (isset($_POST["mail"])? $_POST["mail"] : "");
+            $mdp = (isset($_POST["mdp"])? $_POST["mdp"] : "");
 
-        if (($mail != "")&&($mdp != "")) {
-            //on definit la requete sql
-            $sql = "SELECT * FROM utilisateur WHERE mail LIKE '$mail' AND mdp LIKE '$mdp'";
-            $result = mysqli_query($conn, $sql);
-            //on regarde s'il y a un resultat
-            if (mysqli_num_rows($result) == 1){
-                $data = mysqli_fetch_assoc($result);
-                //on cree une variable pour identifier l'utilisateur dans la session
-                $_SESSION['ID_ut'] = $data['ID_ut'];
-                $_SESSION['statut'] = $data['statut'];
-                //on va vers l'accueil
-                header("Location: accueil.php");
+            if (($mail != "")&&($mdp != "")) {
+                //on definit la requete sql
+                $sql = "SELECT * FROM utilisateur WHERE mail LIKE '$mail' AND mdp LIKE '$mdp'";
+                $result = mysqli_query($conn, $sql);
+                //on regarde s'il y a un resultat
+                if (mysqli_num_rows($result) == 1){
+                    $data = mysqli_fetch_assoc($result);
+                    //on cree une variable pour identifier l'utilisateur dans la session
+                    $_SESSION['ID_ut'] = $data['ID_ut'];
+                    $_SESSION['statut'] = $data['statut'];
+                    //on va vers l'accueil
+                    header("Location: accueil.php");
+                } else {
+                    echo "<div class='error'>E-mail ou mot de passe incorrect</div>";
+                    session_destroy();
+                }
             } else {
-                echo "E-mail ou mot de passe incorrect";
+                echo "<div class='error'>Veuillez saisir votre e-mail et votre mot de passe</div>";
                 session_destroy();
             }
-        } else {
-            echo "Veuillez saisir votre e-mail et votre mot de passe";
-            session_destroy();
         }
-    }
-    ?>
+        ?>
+    </div>
 </body>
 </html>
+
 
 <?php mysqli_close($conn); ?>
