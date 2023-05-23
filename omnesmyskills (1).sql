@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 22 mai 2023 à 11:18
+-- Généré le : lun. 22 mai 2023 à 20:22
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -73,21 +73,6 @@ INSERT INTO `competence` (`ID_comp`, `ID_mat`, `nom`) VALUES
 (7, 3, 'Condensateur'),
 (8, 3, 'Dipole electrostatique'),
 (9, 3, 'Dipole magnetique');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `detailevaluation`
---
-
-DROP TABLE IF EXISTS `detailevaluation`;
-CREATE TABLE IF NOT EXISTS `detailevaluation` (
-  `ID_eval` int(11) NOT NULL,
-  `note` int(3) NOT NULL,
-  `confirme` varchar(3) NOT NULL,
-  `commentaire` text NOT NULL,
-  KEY `FK_DETEVAL_EVAL` (`ID_eval`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -174,6 +159,10 @@ CREATE TABLE IF NOT EXISTS `evaluation` (
   `ID_etu` int(11) NOT NULL,
   `ID_comp` int(11) NOT NULL,
   `deja_evaluee` varchar(3) NOT NULL,
+  `demandee` varchar(3) NOT NULL,
+  `note` int(3) NOT NULL,
+  `confirme` varchar(3) NOT NULL,
+  `commentaire` varchar(500) NOT NULL,
   PRIMARY KEY (`ID_eval`),
   KEY `FK_EVAL_ETU` (`ID_etu`),
   KEY `FK_EVAL_COMP` (`ID_comp`)
@@ -183,19 +172,19 @@ CREATE TABLE IF NOT EXISTS `evaluation` (
 -- Déchargement des données de la table `evaluation`
 --
 
-INSERT INTO `evaluation` (`ID_eval`, `ID_etu`, `ID_comp`, `deja_evaluee`) VALUES
-(1, 6, 1, 'non'),
-(2, 6, 2, 'non'),
-(3, 6, 3, 'non'),
-(4, 7, 1, 'non'),
-(5, 7, 2, 'non'),
-(6, 7, 3, 'non'),
-(7, 8, 1, 'non'),
-(8, 8, 2, 'non'),
-(9, 8, 3, 'non'),
-(10, 2, 1, 'non'),
-(11, 2, 2, 'non'),
-(12, 2, 3, 'non');
+INSERT INTO `evaluation` (`ID_eval`, `ID_etu`, `ID_comp`, `deja_evaluee`, `note`, `confirme`, `commentaire`) VALUES
+(1, 6, 1, 'non', 0, '', ''),
+(2, 6, 2, 'non', 0, '', ''),
+(3, 6, 3, 'non', 0, '', ''),
+(4, 7, 1, 'non', 0, '', ''),
+(5, 7, 2, 'non', 0, '', ''),
+(6, 7, 3, 'non', 0, '', ''),
+(7, 8, 1, 'non', 0, '', ''),
+(8, 8, 2, 'non', 0, '', ''),
+(9, 8, 3, 'non', 0, '', ''),
+(10, 2, 1, 'non', 0, '', ''),
+(11, 2, 2, 'non', 0, '', ''),
+(12, 2, 3, 'non', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -282,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `matiere` (
   `nom` varchar(255) NOT NULL,
   PRIMARY KEY (`ID_mat`),
   KEY `FK_MAT_ENS` (`ID_ens`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `matiere`
@@ -291,7 +280,8 @@ CREATE TABLE IF NOT EXISTS `matiere` (
 INSERT INTO `matiere` (`ID_mat`, `ID_ens`, `nom`) VALUES
 (1, 3, 'Web dynamique'),
 (2, 4, 'Algebre 3'),
-(3, 5, 'Electromagnetisme 2');
+(3, 5, 'Electromagnetisme 2'),
+(4, 3, 'ThÃ©orie des graphes');
 
 -- --------------------------------------------------------
 
@@ -363,12 +353,6 @@ ALTER TABLE `administrateur`
 --
 ALTER TABLE `competence`
   ADD CONSTRAINT `FK_COMP_MAT` FOREIGN KEY (`ID_mat`) REFERENCES `matiere` (`ID_mat`);
-
---
--- Contraintes pour la table `detailevaluation`
---
-ALTER TABLE `detailevaluation`
-  ADD CONSTRAINT `FK_DETEVAL_EVAL` FOREIGN KEY (`ID_eval`) REFERENCES `evaluation` (`ID_eval`);
 
 --
 -- Contraintes pour la table `enseignant`
