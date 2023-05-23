@@ -43,7 +43,7 @@ while ($data = mysqli_fetch_assoc($result)){
     if (isset($_POST[$data['ID_grp']])){
         $_SESSION['ID_grp'] = $data['ID_grp'];
         $_SESSION['nom_grp'] = $data['nom'];
-        header("Location: detailcompetence.php");
+        header("Location: detailgroupe.php");
         die();
     }
 }
