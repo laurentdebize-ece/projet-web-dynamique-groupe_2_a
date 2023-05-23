@@ -4,72 +4,38 @@
     box-sizing: border-box;
   }
   
-  /* Le sélecteur body applique les styles à l'élément body */
   body {
-    /* Définit la police de caractères utilisée pour le texte */
-    font-family: Arial, sans-serif;
-    /* Définit la couleur de fond du body */
+    font-family: Arial;
     background-color: #f2f2f2;
   }
   
-  /* Le sélecteur .container applique les styles à l'élément avec la classe "container" */
   .container {
-    /* Définit la largeur maximale du conteneur */
-    max-width: 960px;
-    /* Centre le conteneur horizontalement en utilisant la marge automatique sur les côtés gauche et droit */
     margin: 0 auto;
-    /* Ajoute un espace interne de 20 pixels à tous les côtés du conteneur */
-    padding: 20px;
+    padding: 40px;
   }
   
-  /* Le sélecteur h1 applique les styles à tous les éléments h1 */
   h1 {
-    /* Centre le texte horizontalement */
+    color: rgb(0, 0, 10);
+    font-size: 50px;
     text-align: center;
-    /* Ajoute une marge inférieure de 20 pixels au titre */
-    margin-bottom: 20px;
+    margin-bottom: 100px;
   }
   
-  /* Le sélecteur .matieres applique les styles à l'élément avec la classe "matieres" */
-  .matieres {
-    /* Utilise le modèle de disposition flexbox */
+  .Matieres {
     display: flex;
-    /* Permet à flex-items de se répartir sur plusieurs lignes si nécessaire */
-    flex-wrap: wrap;
-    /* Centre les flex-items horizontalement */
     justify-content: center;
   }
   
-  /* Le sélecteur .matiere-btn applique les styles aux éléments avec la classe "matiere-btn" */
-  .matiere-btn {
-    /* Affiche les éléments en tant que bloc pour occuper toute la largeur disponible */
-    display: block;
-    /* Définit une largeur fixe de 200 pixels pour les boutons */
-    width: 200px;
-    /* Ajoute un espacement interne de 10 pixels autour du texte du bouton */
+  .matiere {
+    width: 500px;
     padding: 10px;
-    /* Ajoute une marge de 5 pixels autour de chaque bouton pour créer un espacement entre eux */
     margin: 5px;
-    /* Définit la couleur de fond des boutons */
-    background-color: #4CAF50;
-    /* Définit la couleur du texte à l'intérieur des boutons */
+    background-color: #4c6daf;
     color: #fff;
-    /* Supprime les bordures des boutons */
-    border: none;
-    /* Définit le curseur de la souris pour les boutons */
     cursor: pointer;
-    /* Centre le texte à l'intérieur des boutons */
     text-align: center;
   }
   
-  /* Le sélecteur .matiere-btn:hover applique les styles lorsque le curseur survole les boutons */
-  .matiere-btn:hover {
-    /* Change la couleur de fond des boutons au survol */
-    background-color: #45a049;
-  }
-  
-  /* Le sélecteur .message applique les styles à l'élément avec la classe "message" */
   .message {
-    /* Centre le texte horizontalement */
     text-align: center;
   }
