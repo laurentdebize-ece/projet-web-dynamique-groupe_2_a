@@ -2,235 +2,187 @@
 <html>
     <meta charset="UTF-8">
 <head>
-	<title>Mes matieres</title>
-	<style>
-        /* Style pour le menu déroulant */
-		.dropdown {
-			position: absolute;
-			top: 0;
-			left: 0;
-			display: inline-block;
-			margin: 10px;
-			background-color: #fff; /* Couleur de fond du menu */
-			box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-			border-radius: 5px;
-		}
-		.dropdown button {
-			background-color: transparent;
-			color: #333;
-			border: none;
-			padding: 10px;
-			font-size: 16px;
-			cursor: pointer;
-			outline: none;
-		}
-		.dropdown-content {
-			display: none;
-			position: absolute;
-			left: 0;
-			top: 100%;
-			z-index: 1;
-			min-width: 160px;
-			background-color: #fff; /* Couleur de fond du menu déroulant */
-			box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-			border-radius: 5px;
-		}
-		.dropdown-content a {
-			color: #333;
-			padding: 10px;
-			display: block;
-			text-align: left;
-			text-decoration: none;
-			font-size: 16px;
-			border-bottom: 1px solid #ccc;
-		}
-		.dropdown-content a:active {
-			background-color: #e1e1e1; /* Couleur de fond du thème sélectionné */
-		}
-		.dropdown:hover .dropdown-content {
-			display: block;
-		}
-		/* Style pour la barre de déconnexion */
-		.logout {
-			position: absolute;
-			top: 0;
-			right: 0;
-			display: flex;
-			align-items: center;
-			margin: 10px;
-			background-color: #ffffff; /* Couleur de fond de la barre de déconnexion */
-			padding: 10px;
-			border-radius: 5px;
-		}
-		.logout a {
-			color: #000000;
-			text-decoration: none;
-			font-size: 16px;
-			font-weight: bold;
-			margin-left: 10px;
-		}
-		.logout img {
-			width: 30px;
-			height: 30px;
-			border-radius: 50%;
-			object-fit: cover;
-			margin-right: 10px;
-		}
-		body {
-			background-color: #6D7CAA; /* Couleur de fond de la page */
-			font-family: Arial, sans-serif; /* Police de caractères */
-			color: #333; /* Couleur du texte */
-			line-height: 1.5; /* Hauteur de ligne */
-		}
-		h1 {
-			font-size: 24px; /* Taille du titre */
-			margin: 20px 0; /* Marge autour du titre */
-			text-align: center; /* Alignement du titre */
-		}
-		p {
-			font-size: 16px; /* Taille du texte */
-			margin: 20px; /* Marge autour du texte */
-			text-align: justify; /* Justification du texte */
-		}
-		.container {
-			overflow: hidden;
-			width: 500px;
-			margin: 0 auto;
-		}
+    <title>OmnesMySkills</title>
+    <style>
+                .dropdown {
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            display: inline-block;
+                                            margin: 5px;
+                                            background-color: #fff; /* Couleur de fond du menu */
+                                            /*box-shadow: 0 2px 5px rgba(0,0,0,0.1);*/
+                                            /*border-radius: 5px;*/
+                              }
+                              .dropdown button {
+                                            background-color: transparent;
+                                            color: #333;
+                                            border: none;
+                                            padding: 7px;
+                                            font-size: 10px;
+                                            cursor: pointer;
+                                            outline: none;
+                              }
+                              .dropdown-content {
+                                            display: none;
+                                            position: absolute;
+                                            left: 0;
+                                            top: 100%;
+                                            z-index: 1;
+                                            min-width: 160px;
+                                            background-color: #fff; /* Couleur de fond du menu déroulant */
+                                            /*box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                                            border-radius: 5px;*/
+                              }
+                              .dropdown-content a {
+                                            color: #333;
+                                            padding: 10px;
+                                            display: block;
+                                            text-align: left;
+                                            text-decoration: none;
+                                            font-size: 16px;
+                                            border-bottom: 1px solid #ccc;
+                              }
+        .dropdown-content a:active {
+                                            background-color: #ffffff; /* Couleur de fond du thème sélectionné */
+                              }
+                              .dropdown:hover .dropdown-content {
+                                            display: block;
+                              }
+                              /* Style pour la barre de déconnexion */
+                              .logout {
+                                            position: absolute;
+                                            top: 0;
+                                            right: 0;
+                                            display: flex;
+                                            align-items: center;
+                                            margin: 10px;
+                                            background-color: #ffffff; /* Couleur de fond de la barre de déconnexion */
+                                            padding: 10px;
+                                            border-radius: 5px;
+                              }
+                              .logout a {
+                                            color: #000000;
+                                            text-decoration: none;
+                                            font-size: 16px;
+                                            font-weight: bold;
+                                            margin-left: 10px;
+                              }
+                              .logout img {
+                                            width: 30px;
+                                            height: 30px;
+                                            border-radius: 50%;
+                                            object-fit: cover;
+                                            margin-right: 10px;
+                              }
+        body {
+            background: url('../image/campus\ image\ 1.jpg') no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .carousel {
+            width: 600px;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
 
-		.slider {
-			display: flex;
-			transition: transform 0.5s ease;
-			height: 300px;
-		}
+        .carousel__slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            opacity: 0;
+        }
 
-		.slider img {
-			flex: 0 0 auto;
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-		}
+        .carousel__slide:nth-child(1) {
+            opacity: 1;
+        }
 
-		.prev, .next {
-			cursor: pointer;
-			position: absolute;
-			top: 50%;
-			transform: translateY(-50%);
-			width: 30px;
-			height: 30px;
-			background-color: gray;
-			color: white;
-			text-align: center;
-			font-size: 20px;
-			line-height: 30px;
-		}
+        #prev, #next {
+            position: absolute;
+            top: 90%;
+            transform: translateY(-50%);
+            background-color: #f8f9fa; /* Couleur de fond */
+            border: none;
+            border-radius: 5px; /* Coins arrondis */
+            padding: 10px;
+            box-shadow: 2px 2px 8px rgba(6, 118, 146, 0.2); /* Ombre portée */
+            transition: background-color 0.3s; /* Transition pour adoucir le changement de couleur */
+        }
 
-		.prev {
-			left: 0;
-		}
+        #prev {
+            left: 10px;
+        }
 
-		.next {
-			right: 0;
-		}
-        #slider {
-  width: 500px;
-  height: 300px;
-  overflow: hidden;
-  position: relative;
-  margin: 0 auto;
-}
-
-    #slider img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-    }
-    #slider img.active {
-      opacity: 1;
-    }
-    #slider nav {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    #slider nav button {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background-color: #ccc;
-      margin: 0 5px;
-      border: none;
-      cursor: pointer;
-    }
-    #slider nav button.active {
-      background-color: #333;
-    }
-	</style>
+        #next {
+            right: 10px;
+        }
+    </style>
 </head>
 <body>
-	<!-- Barre de déconnexion -->
-	<div class="logout">
-		<img src="../image/profil.jpg" alt="Mon profil">
-		<a href="connexion.html">Deconnexion</a>
-	</div>
-	<!-- Menu déroulant -->
-	<div class="dropdown">
-		<button><img src="../image/menu.jpg" alt="Menu"></button>
-		<div class="dropdown-content">
-			<a href="Acceuil.html">Acceuil</a>
-			<a href="matieres.html">Matieres</a>
-			<a href="Competence.html">Mes competences</a>
-			<a href="#">Toutes competences</a>
-		</div>
-	</div>
-    <body>
-        <h1>Mes Matieres</h1>
-	<p>.</p>
-	<p>.</p>
-	<p>.</p>
-        <div id="slider">
-          <a href="MatieresMaths.html"><img class="active" src="../image/maths.png" alt="Maths"></a>
-          <a href="MatieresPhysique.html"><img src="../image/physique.png" alt="Physique"></a>
-          <a href="MatieresElectronique.html"><img src="../image/electronique.png" alt="Electronique"></a>
-         <a href="MatieresInformatique.html"><img src="../image/informatique.png" alt="Informatique"></a>
-          <a href="MatieresLV1.html"><img src="../image/Anglais.png" alt="LV1"></a>
-          <a href="MatieresV2.html"><img src="../image/espagnol.png" alt="LV2"></a>
-          <a href="MatieresFrancais.html"><img src="../image/français.png" alt="Francais"></a>
-          
-          <nav>
-            <button class="active" onclick="changeImage(0)"></button>
-            <button onclick="changeImage(1)"></button>
-            <button onclick="changeImage(2)"></button>
-            <button onclick="changeImage(3)"></button>
-            <button onclick="changeImage(4)"></button>
-            <button onclick="changeImage(5)"></button>
-            <button onclick="changeImage(6)"></button>
-          </nav>
+    <!-- Barre de déconnexion -->
+               <div class="logout">
+                              <img src="../image/profil.jpg" alt="Mon profil">
+                              <a href="connexion.html">Deconnexion</a>
+               </div>
+               <!-- Menu déroulant -->
+               <div class="dropdown">
+                              <button><img src="../image/menu.jpg" alt="Menu"></button>
+                              <div class="dropdown-content">
+                                            <a href="Acceuil.html">Acceuil</a>
+                                            <a href="matieres.html">Matieres</a>
+                                            <a href="Competence.html">Mes competences</a>
+                                            <a href="#">Toutes competences</a>
+                              </div>
+               </div>
+    <div class="carousel">
+        <div class="carousel__slide">
+            <a href="MatieresMaths.html"><img src="../image/maths.png" alt="Maths"></a>
         </div>
-        <script>
-          const images = document.querySelectorAll('#slider img');
-          const buttons = document.querySelectorAll('#slider nav button');
-      
-          let currentImage = 0;
-      
-          function changeImage(index) {
-            images[currentImage].classList.remove('active');
-            buttons[currentImage].classList.remove('active');
-            currentImage = index;
-            images[currentImage].classList.add('active');
-            buttons[currentImage].classList.add('active');
-          }
-      
-          setInterval(() => {
-            let nextImage = currentImage + 1;
-            if (nextImage >= images.length) {
-              nextImage = 0;
-            }
-            changeImage(nextImage);
-          }, 5000);
-        </script>
-      </body>
-      </html>
+        <div class="carousel__slide">
+            <a href="MatieresPhysique.html"><img src="../image/physique.png" alt="physique"></a>
+        </div>
+        <div class="carousel__slide">
+            <a href="MatieresElectronique.html"><img src="../image/electronique.png" alt="electronique"></a>
+        </div>
+        <div class="carousel__slide">
+            <a href="MatieresInformatique.html"><img src="../image/Informatique.png" alt="informatique"></a>
+        </div>
+        <div class="carousel__slide">
+            <a href="MatieresLV1.html"><img src="../image/anglais.png" alt="anglais"></a>
+        </div>
+        <div class="carousel__slide">
+            <a href="MatieresLV2.html"><img src="../image/espagnol.png" alt="espagnol"></a>
+        </div>
+        <div class="carousel__slide">
+            <a href="MatieresFrancais.html"><img src="../image/français.png" alt="français"></a>
+        </div>
+        <button id="prev">Précédent</button>
+        <button id="next">Suivant</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        let slides = document.querySelectorAll('.carousel__slide');
+
+        document.getElementById('next').addEventListener('click', function() {
+            slides[currentSlide].style.opacity = 0;
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].style.opacity = 1;
+        });
+
+        document.getElementById('prev').addEventListener('click', function() {
+            slides[currentSlide].style.opacity = 0;
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            slides[currentSlide].style.opacity = 1;
+        });
+    </script>
+</body>
+</html>

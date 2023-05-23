@@ -54,6 +54,17 @@ require("blocs/config.php");
     <?php } ?>
 
     <?php
+    if ($_SESSION['statut'] == "admin" || $_SESSION['statut'] == "ens"){ ?>
+        <br><div>
+            <form method="post" action="">
+                Ajouter une compétence :<br>
+                <input type="text" name="nv_comp">
+                <input type="submit" name="ajouter_comp" value="Ajouter la compétence">
+            </form>
+        </div>
+    <?php } ?>
+
+    <?php
     if ($_SESSION['statut'] == "admin"){ ?>
         <br><div>
             <?php
