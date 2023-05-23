@@ -1,123 +1,12 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
   }
-  
-  .header {
-    background-color: #CCCCCC;
-    padding: 20px;
-    color: #FFFFFF;
+
+  h1 {
+    color: black;
+    font-size: 40px;
     text-align: center;
-  }
-/* Style pour le menu déroulant */
-.dropdown {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: inline-block;
-    margin: 10px;
-    background-color: #fff; /* Couleur de fond du menu */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    border-radius: 5px;
-}
-.dropdown button {
-    background-color: transparent;
-    color: #333;
-    border: none;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    outline: none;
-}
-.dropdown-content {
-    display: none;
-    position: absolute;
-    left: 0;
-    top: 100%;
-    z-index: 1;
-    min-width: 160px;
-    background-color: #fff; /* Couleur de fond du menu déroulant */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    border-radius: 5px;
-}
-.dropdown-content a {
-    color: #333;
-    padding: 10px;
-    display: block;
-    text-align: left;
-    text-decoration: none;
-    font-size: 16px;
-    border-bottom: 1px solid #ccc;
-}
-.dropdown-content a:active {
-    background-color: #e1e1e1; /* Couleur de fond du thème sélectionné */
-}
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-/* Style pour la barre de déconnexion */
-.logout {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: flex;
-    align-items: center;
-    margin: 10px;
-    background-color: #ffffff; /* Couleur de fond de la barre de déconnexion */
-    padding: 10px;
-    border-radius: 5px;
-}
-.logout a {
-    color: #000000;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    margin-left: 10px;
-}
-.logout img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-}
-body {
-    font-family: Arial, sans-serif; /* Police de caractères */
-    color: #333; /* Couleur du texte */
-    line-height: 1.5; /* Hauteur de ligne */
-}
-h1 {
-    font-size: 40px; /* Taille du titre */
-    margin: 20px 0; /* Marge autour du titre */
-    text-align: center; /* Alignement du titre */
-}
-p {
-    font-size: 16px; /* Taille du texte */
-    margin: 20px; /* Marge autour du texte */
-    text-align: justify; /* Justification du texte */
-}
-img {
-    max-width: 50%; /* Taille maximale de l'image */
-    display: block; /* Centrer l'image dans le texte */
-    margin: 20px auto; /* Marge autour de l'image */
-}
-.footer {
-    background-color: #CCCCCC;
-    padding: 20px;
-    color: #FFFFFF;
-    text-align: center;
-  }
-  
-  .image-with-text {
-    display: flex;
-    align-items: center;
-  }
-  
-  .image-with-text img {
-    margin-right: 10px;
-    max-width: 30%;
-    padding: 10px;
   }
   
   
