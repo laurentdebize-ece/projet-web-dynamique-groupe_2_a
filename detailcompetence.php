@@ -69,7 +69,10 @@ if (isset($_POST["confirmer_eval"])){
         }
     } ?>
 
-    <?php if ($_SESSION['statut'] == "etu"){ ?>
+    <?php if ($_SESSION['statut'] == "etu"){
+        $sql = "SELECT * FROM evaluation WHERE ID_comp LIKE '$ID_comp' AND ID_ut LIKE '$ID_ut'";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) == 1){ ?>
         <br><div>
             <form method="post" action="">
                 Evaluation :<br>
@@ -80,7 +83,8 @@ if (isset($_POST["confirmer_eval"])){
                 <?php echo $erreur_eval ?>
             </form>
         </div>
-    <?php } ?>
+        <?php }
+    } ?>
     
 </body>
 </html>
