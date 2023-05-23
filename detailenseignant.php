@@ -45,7 +45,7 @@ if(isset($_POST["confirmer_mat"])){
     <div>
         Ajouter une matière :<br>
         <form method="post" action="">
-            <input type="text" name="nv_mat"><br>
+            <input type="text" name="nv_mat">
             <input type="submit" name="confirmer_mat" value="Confirmer">
         </form>
         <?php echo $erreur_mat; ?>
