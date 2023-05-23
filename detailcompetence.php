@@ -11,6 +11,41 @@ if (isset($_SESSION['ID_comp']) && isset($_SESSION['nom_comp'])){
     die();
 }
 require("blocs/config.php");
+// Récupération des données de la base de données
+$sql = "SELECT * FROM competences";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Affichage des compétences et des choix pour chaque compétence
+    while ($row = $result->fetch_assoc()) {
+        echo $row["nom_competence"] . ": ";
+
+        // Options possibles pour l'évaluation
+        $options = array("acquis", "en cours d'acquisition", "non acquis");
+
+        // Affichage des choix pour chaque compétence
+        foreach ($options as $option) {
+            echo "<input type='radio' name='" . $row["id_competence"] . "' value='" . $option . "'>" . $option . " ";
+        }
+
+        echo "<br>";
+    }
+} else {
+    echo "Aucune compétence trouvée dans la base de données.";
+}
+
+// Soumission du formulaire
+if (isset($_POST["submit"])) {
+    // Parcourir les données soumises
+    foreach ($_POST as $competenceId => $evaluation) {
+        // Vérifier si l'évaluation est valide
+        if (in_array($evaluation, $options)) {
+            // Mettre à jour l'évaluation dans la base de données
+            $sql = "UPDATE competences SET evaluation = '" . $evaluation . "' WHERE id_competence = " . $competenceId;
+            $conn->query($sql);
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>

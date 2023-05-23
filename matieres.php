@@ -11,21 +11,24 @@ require("blocs/config.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="matiere.css">
 </head>
 <body>
     <?php require("blocs/header.php"); ?>
-    <div><br>Matières<br><br></div>
-    <div>
-        <?php
-        $sql = "SELECT * FROM matiere";
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result)){ ?>
-            <form method="post" action="">
-            <?php while ($data = mysqli_fetch_assoc($result)){ ?>
-                <input type="submit" name="<?php echo $data['ID_mat'] ?>" value="<?php echo $data['nom'] ?>"><br>
-            <?php } ?>
-            </form>
-        <?php } else { echo "Aucune matière.<br>"; } ?>
+    <div class="container">
+        <h1>Matières</h1>
+        <div class="matieres">
+            <?php
+            $sql = "SELECT * FROM matiere";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result)){ ?>
+                <form method="post" action="">
+                <?php while ($data = mysqli_fetch_assoc($result)){ ?>
+                    <input type="submit" class="matiere-btn" name="<?php echo $data['ID_mat'] ?>" value="<?php echo $data['nom'] ?>"><br>
+                <?php } ?>
+                </form>
+            <?php } else { echo "Aucune matière.<br>"; } ?>
+        </div>
     </div>
 </body>
 </html>
