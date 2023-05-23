@@ -26,7 +26,7 @@
     justify-content: center;
   }
   
-  .matiere, .competence, .groupe, .promo, .enseignant{
+  .matiere, .competence, .groupe, .promo, .enseignant, .detailpromo{
     width: 500px;
     padding: 10px;
     margin: 5px;

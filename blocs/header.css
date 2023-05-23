@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 11px;
+}
+
+header {
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}
+
+.bouton1 {
+    border: 1px solid #ccc;
+    background-color: transparent;
+    padding: 8px 16px;
+    margin: 0 4px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    transition: background-color 0.3s ease-in-out;
+}
+

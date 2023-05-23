@@ -20,17 +20,18 @@ require("blocs/config.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="detailmatiere.css">
 </head>
 <body>
     <?php require("blocs/header.php"); ?>
     
-    <br><div><?php echo $_SESSION['nom_mat'] ?></div>
+    <br><div><h1><?php echo $_SESSION['nom_mat'] ?></h1></div>
 
     <?php
     if ($_SESSION['statut'] == "admin"){ ?>
         <br><div>
             <form method="post" action="">
-                <input type="submit" name="supprimer_mat" value="Supprimer la matière">
+                <input type="submit" class="bouton" name="supprimer_mat" value="Supprimer la matière">
                 <br><br>
                 Ajouter un groupe :<br>
                 <select name="choix_ajt_grp">
@@ -48,7 +49,7 @@ require("blocs/config.php");
                         <?php }
                     } ?>
                 </select>
-                <input type="submit" name="ajouter_grp" value="Ajouter le groupe">
+                <input type="submit" class="bouton" name="ajouter_grp" value="Ajouter le groupe">
             </form>
         </div>
     <?php } ?>
@@ -59,7 +60,7 @@ require("blocs/config.php");
             <form method="post" action="">
                 Ajouter une compétence :<br>
                 <input type="text" name="nv_comp">
-                <input type="submit" name="ajouter_comp" value="Ajouter la compétence">
+                <input type="submit" class="bouton" name="ajouter_comp" value="Ajouter la compétence">
             </form>
         </div>
     <?php } ?>
@@ -77,7 +78,7 @@ require("blocs/config.php");
                     $sql2 = "SELECT * FROM groupe WHERE ID_grp LIKE '$ID_grp'";
                     $result2 = mysqli_query($conn, $sql2);
                     $data2 = mysqli_fetch_assoc($result2) ?>
-                <input type="submit" name="<?php echo "grp" . $data['ID_grp'] ?>" value="<?php echo $data2['nom'] ?>"><br>
+                <input type="submit" class="bouton" name="<?php echo "grp" . $data['ID_grp'] ?>" value="<?php echo $data2['nom'] ?>"><br>
                 <?php } ?>
                 </form>
             <?php } else { echo "Aucun groupe.<br>"; } ?>
@@ -91,7 +92,7 @@ require("blocs/config.php");
         if (mysqli_num_rows($result)){?>
             <form method="post" action="">
             <?php while ($data = mysqli_fetch_assoc($result)){ ?>
-                <input type="submit" name="<?php echo $data['ID_comp'] ?>" value="<?php echo $data['nom'] ?>"><br>
+                <input type="submit" class="bouton" name="<?php echo $data['ID_comp'] ?>" value="<?php echo $data['nom'] ?>"><br>
             <?php } ?>
             </form>
         <?php } else { echo "Aucune compétence.<br>"; } ?>
