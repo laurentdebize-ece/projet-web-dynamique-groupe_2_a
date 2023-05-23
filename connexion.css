@@ -1,0 +1,59 @@
+body {
+    background-color: #F0F0F0;
+}
+
+.container {
+    width: 300px;
+    margin: 100px auto;
+    background-color: #bebdbd;
+    padding: 20px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+}
+
+.container h2 {
+    text-align: center;
+    color: #333333;
+}
+
+.container form {
+    margin-top: 20px;
+}
+
+.container form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #000000;
+}
+
+.container form input[type="email"]{
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #CCCCCC;
+    border-radius: 30px;
+    margin-bottom: 15px;
+}
+
+.container form input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #CCCCCC;
+    border-radius: 30px;
+    margin-bottom: 30px;
+}
+
+.container form input[type="submit"] {
+    width: 50%;
+    padding: 10px;
+    background-color: #34bfce;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 30px;
+}
+
+
+.error {
+    color: #FF0000;
+    text-align: center;
+    margin-top: 10px;
+}
