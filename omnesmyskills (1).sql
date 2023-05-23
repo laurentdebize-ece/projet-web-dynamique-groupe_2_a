@@ -159,6 +159,7 @@ CREATE TABLE IF NOT EXISTS `evaluation` (
   `ID_etu` int(11) NOT NULL,
   `ID_comp` int(11) NOT NULL,
   `deja_evaluee` varchar(3) NOT NULL,
+  `demandee` varchar(3) NOT NULL,
   `note` int(3) NOT NULL,
   `confirme` varchar(3) NOT NULL,
   `commentaire` varchar(500) NOT NULL,

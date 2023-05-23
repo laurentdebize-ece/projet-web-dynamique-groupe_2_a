@@ -24,18 +24,56 @@ require("blocs/config.php");
 <body>
     <?php require("blocs/header.php"); ?>
     
+    <br><div><?php echo $_SESSION['nom_mat'] ?></div>
+
     <?php
     if ($_SESSION['statut'] == "admin"){ ?>
         <br><div>
             <form method="post" action="">
-                <input type="submit" name="supprimer_mat" value="Supprimer">
+                <input type="submit" name="supprimer_mat" value="Supprimer la matière">
+                <br><br>
+                Ajouter un groupe :<br>
+                <select name="choix_ajt_grp">
+                    <option value="aucun_grp">---</option>
+                    <?php
+                    $sql = "SELECT * FROM groupe";
+                    $result = mysqli_query($conn, $sql);
+                    while ($data = mysqli_fetch_assoc($result)){
+                        $ID_grp = $data['ID_grp'];
+                        $nom_grp = $data['nom'];
+                        $sql2 = "SELECT * FROM groupematiere WHERE ID_mat LIKE $ID_mat AND ID_grp LIKE $ID_grp";
+                        $result2 = mysqli_query($conn, $sql2);
+                        if (mysqli_num_rows($result2) == 0){ ?>
+                            <option value="<?php echo $ID_grp ?>"><?php echo $data['nom'] ?></option>
+                        <?php }
+                    } ?>
+                </select>
+                <input type="submit" name="ajouter_grp" value="Ajouter le groupe">
             </form>
         </div>
     <?php } ?>
 
-    <div><br><?php echo $_SESSION['nom_mat'] ?><br><br></div>
+    <?php
+    if ($_SESSION['statut'] == "admin"){ ?>
+        <br><div>
+            <?php
+            $sql = "SELECT * FROM groupematiere WHERE ID_mat LIKE $ID_mat";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result)){?>
+                <form method="post" action="">
+                <?php while ($data = mysqli_fetch_assoc($result)){
+                    $ID_grp = $data['ID_grp'];
+                    $sql2 = "SELECT * FROM groupe WHERE ID_grp LIKE '$ID_grp'";
+                    $result2 = mysqli_query($conn, $sql2);
+                    $data2 = mysqli_fetch_assoc($result2) ?>
+                <input type="submit" name="<?php echo "grp" . $data['ID_grp'] ?>" value="<?php echo $data2['nom'] ?>"><br>
+                <?php } ?>
+                </form>
+            <?php } else { echo "Aucun groupe.<br>"; } ?>
+        </div>
+    <?php } ?>
 
-    <div>
+    <br><div>
         <?php
         $sql = "SELECT * FROM competence WHERE ID_mat LIKE $ID_mat";
         $result = mysqli_query($conn, $sql);
@@ -51,6 +89,21 @@ require("blocs/config.php");
 </html>
 
 <?php
+$sql = "SELECT * FROM groupematiere WHERE ID_mat LIKE $ID_mat";
+$result = mysqli_query($conn, $sql);
+while ($data = mysqli_fetch_assoc($result)){
+    if (isset($_POST["grp" . $data['ID_grp']])){
+        $ID_grp = $data['ID_grp'];
+        $sql2 = "SELECT * FROM groupe WHERE ID_grp LIKE '$ID_grp'";
+        $result2 = mysqli_query($conn, $sql2);
+        $data2 = mysqli_fetch_assoc($result2);
+        $_SESSION['ID_grp'] = $data['ID_grp'];
+        $_SESSION['nom_grp'] = $data2['nom'];
+        header("Location: detailgroupe.php");
+        die();
+    }
+}
+
 $sql = "SELECT * FROM competence WHERE ID_mat LIKE $ID_mat";
 $result = mysqli_query($conn, $sql);
 while ($data = mysqli_fetch_assoc($result)){
@@ -61,6 +114,7 @@ while ($data = mysqli_fetch_assoc($result)){
         die();
     }
 }
+
 if ($_SESSION['statut'] == "admin"){
     if (isset($_POST["supprimer_mat"])){
         $sql = "DELETE FROM groupematiere WHERE ID_mat LIKE '$ID_mat'";
@@ -80,6 +134,39 @@ if ($_SESSION['statut'] == "admin"){
         die();
     }
 }
+
+if ($_SESSION['statut'] == "admin" && isset($_POST['ajouter_grp']) && $_POST["choix_ajt_grp"] != "aucun_grp"){
+    $sql = "SELECT * FROM groupe";
+    $result = mysqli_query($conn, $sql);
+    while ($data = mysqli_fetch_assoc($result)){
+        $ID_grp = $data['ID_grp'];
+        $nom_grp = $data['nom'];
+        $sql2 = "SELECT * FROM groupematiere WHERE ID_mat LIKE $ID_mat AND ID_grp LIKE $ID_grp";
+        $result2 = mysqli_query($conn, $sql2);
+        if (mysqli_num_rows($result2) == 0){
+            if ($_POST["choix_ajt_grp"] == $ID_grp){
+                echo $_POST["choix_ajt_grp"];
+                $sql3 = "INSERT INTO groupematiere(ID_grp, ID_mat) VALUES('$ID_grp','$ID_mat')";
+                $result3 = mysqli_query($conn, $sql3);
+                $sql3 = "SELECT * FROM competence WHERE ID_mat LIKE '$ID_mat'";
+                $result3 = mysqli_query($conn, $sql3);
+                while ($data3 = mysqli_fetch_assoc($result3)){
+                    $ID_comp = $data3['ID_comp'];
+                    $sql4 = "SELECT * FROM groupeetudiant WHERE ID_grp LIKE '$ID_grp'";
+                    $result4 = mysqli_query($conn, $sql4);
+                    while ($data4 = mysqli_fetch_assoc($result4)){
+                        $ID_etu = $data4['ID_etu'];
+                        $sql5 = "INSERT INTO evaluation(ID_etu, ID_comp, deja_evaluee, demandee, note, confirme, commentaire) VALUES('$ID_etu','$ID_comp','non','','0','','')";
+                        $result5 = mysqli_query($conn, $sql5);
+                    }
+                }
+                header("Location: detailmatiere.php");
+                die();
+            }
+        }
+    }
+}
+
 require("blocs/redirection.php");
 mysqli_close($conn);
 ?>

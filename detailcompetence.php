@@ -2,6 +2,7 @@
 require("blocs/verificationsession.php");
 if (isset($_SESSION['ID_comp']) && isset($_SESSION['nom_comp'])){
     $ID_comp = $_SESSION['ID_comp'];
+    $ID_ut = $_SESSION['ID_ut'];
 } else {
     if ($_SESSION['statut'] == "etu" || $_SESSION['statut'] == "ens"){
         header("Location: mescompetences.php");
@@ -11,41 +12,6 @@ if (isset($_SESSION['ID_comp']) && isset($_SESSION['nom_comp'])){
     die();
 }
 require("blocs/config.php");
-// Récupération des données de la base de données
-$sql = "SELECT * FROM competences";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    // Affichage des compétences et des choix pour chaque compétence
-    while ($row = $result->fetch_assoc()) {
-        echo $row["nom_competence"] . ": ";
-
-        // Options possibles pour l'évaluation
-        $options = array("acquis", "en cours d'acquisition", "non acquis");
-
-        // Affichage des choix pour chaque compétence
-        foreach ($options as $option) {
-            echo "<input type='radio' name='" . $row["id_competence"] . "' value='" . $option . "'>" . $option . " ";
-        }
-
-        echo "<br>";
-    }
-} else {
-    echo "Aucune compétence trouvée dans la base de données.";
-}
-
-// Soumission du formulaire
-if (isset($_POST["submit"])) {
-    // Parcourir les données soumises
-    foreach ($_POST as $competenceId => $evaluation) {
-        // Vérifier si l'évaluation est valide
-        if (in_array($evaluation, $options)) {
-            // Mettre à jour l'évaluation dans la base de données
-            $sql = "UPDATE competences SET evaluation = '" . $evaluation . "' WHERE id_competence = " . $competenceId;
-            $conn->query($sql);
-        }
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -58,8 +24,42 @@ if (isset($_POST["submit"])) {
 </head>
 <body>
     <?php require("blocs/header.php"); ?>
-    <div><br><?php echo $_SESSION['nom_comp'] ?><br><br></div>
-    <div></div>
+    <br><div><?php echo $_SESSION['nom_comp'] ?></div>
+    
+    <?php
+    if ($_SESSION['statut'] == "etu"){
+        $sql = "SELECT * FROM evaluation WHERE ID_etu LIKE '$ID_ut' AND ID_comp LIKE '$ID_comp'";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) == 1){ ?>
+            <br><div>Dernière évaluation : 
+            <?php $data = mysqli_fetch_assoc($result);
+            if ($data['deja_evaluee'] == "oui"){
+                switch ($data['note']) {
+                    case "na": echo "non-acquis"; break;
+                    case "eca": echo "en cours d'acquisition"; break;
+                    case "a": echo "acquis"; break;
+                    default : echo "aucune évaluation";
+                }
+            } else if ($data['deja_evaluee'] == "non"){
+                echo "aucune évaluation";
+            }
+            ?></div><?php
+        }
+    } ?>
+
+    <?php if ($_SESSION['statut'] == "etu"){ ?>
+        <br><div>
+            <form method="post" action="">
+                Evaluation :<br>
+                <input type="radio" name="eval" value="comp_na"><label for="comp_na">Non-acquis</label><br>
+                <input type="radio" name="eval" value="comp_eca"><label for="comp_eca">En cours d'acquisition</label><br>
+                <input type="radio" name="eval" value="comp_a"><label for="comp_a">Acquis</label><br>
+                <input type="submit" name="confirmer_eval" value="Confirmer l'auto-évaluation"><br>
+                <?php echo $erreur_eval ?>
+            </form>
+        </div>
+    <?php } ?>
+    
 </body>
 </html>
 
