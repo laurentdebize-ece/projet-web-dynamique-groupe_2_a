@@ -11,6 +11,42 @@ if (isset($_SESSION['ID_mat']) && isset($_SESSION['nom_mat'])){
     die();
 }
 require("blocs/config.php");
+$erreur_comp = "";
+
+if(isset($_POST["confirmer_comp"])){
+    $nv_comp = (isset($_POST["nv_comp"])? $_POST["nv_comp"] : "");
+
+    $sql = "SELECT * FROM competence WHERE ID_mat LIKE '$ID_mat' AND nom LIKE '%$nv_comp%'";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) == 0){
+        if ($nv_comp != ""){
+            $sql2 = "INSERT INTO competence(ID_mat, nom) VALUES('$ID_mat', '$nv_comp')";
+            $result2 = mysqli_query($conn, $sql2);
+            $sql2 = "SELECT * FROM competence WHERE ID_mat LIKE '$ID_mat' AND nom LIKE '$nv_comp'";
+            $result2 = mysqli_query($conn, $sql2);
+            if (mysqli_num_rows($result2) == 1){
+                $data2 = mysqli_fetch_assoc($result2);
+                $ID_comp = $data2['ID_comp'];
+                $sql2 = "SELECT * FROM groupematiere WHERE ID_mat LIKE '$ID_mat'";
+                $result2 = mysqli_query($conn, $sql2);
+                while ($data2 = mysqli_fetch_assoc($result2)){
+                    $ID_grp = $data2['ID_grp'];
+                    $sql3 = "SELECT * FROM groupeetudiant WHERE ID_grp LIKE '$ID_grp'";
+                    $result3 = mysqli_query($conn, $sql3);
+                    while ($data3 = mysqli_fetch_assoc($result3)){
+                        $ID_etu = $data3['ID_etu'];
+                        $sql4 = "INSERT INTO evaluation(ID_etu, ID_comp, deja_evaluee, demandee, note, confirme, commentaire) VALUES('$ID_etu','$ID_comp','non','non','','non','')";
+                        $result4 = mysqli_query($conn, $sql4);
+                    }
+                }
+            }
+        } else {
+            $erreur_comp = "Veuillez saisir le nom de la compétence<br>";
+        }
+    } else {
+        $erreur_comp = "Une compétence porte déjà le même nom<br>";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +84,7 @@ require("blocs/config.php");
                         <?php }
                     } ?>
                 </select>
-                <input type="submit" name="ajouter_grp" value="Ajouter le groupe">
+                <input type="submit" name="ajouter_grp" value="Confirmer">
             </form>
         </div>
     <?php } ?>
@@ -59,8 +95,9 @@ require("blocs/config.php");
             <form method="post" action="">
                 Ajouter une compétence :<br>
                 <input type="text" name="nv_comp">
-                <input type="submit" name="ajouter_comp" value="Ajouter la compétence">
+                <input type="submit" name="confirmer_comp" value="Confirmer">
             </form>
+            <?php echo $erreur_comp; ?>
         </div>
     <?php } ?>
 
@@ -167,7 +204,7 @@ if ($_SESSION['statut'] == "admin" && isset($_POST['ajouter_grp']) && $_POST["ch
                     $result4 = mysqli_query($conn, $sql4);
                     while ($data4 = mysqli_fetch_assoc($result4)){
                         $ID_etu = $data4['ID_etu'];
-                        $sql5 = "INSERT INTO evaluation(ID_etu, ID_comp, deja_evaluee, demandee, note, confirme, commentaire) VALUES('$ID_etu','$ID_comp','non','','0','','')";
+                        $sql5 = "INSERT INTO evaluation(ID_etu, ID_comp, deja_evaluee, demandee, note, confirme, commentaire) VALUES('$ID_etu','$ID_comp','non','non','','non','')";
                         $result5 = mysqli_query($conn, $sql5);
                     }
                 }
