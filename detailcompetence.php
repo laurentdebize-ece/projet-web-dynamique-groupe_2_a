@@ -2,6 +2,7 @@
 require("blocs/verificationsession.php");
 if (isset($_SESSION['ID_comp']) && isset($_SESSION['nom_comp'])){
     $ID_comp = $_SESSION['ID_comp'];
+    $ID_ut = $_SESSION['ID_ut'];
 } else {
     if ($_SESSION['statut'] == "etu" || $_SESSION['statut'] == "ens"){
         header("Location: mescompetences.php");
@@ -11,6 +12,28 @@ if (isset($_SESSION['ID_comp']) && isset($_SESSION['nom_comp'])){
     die();
 }
 require("blocs/config.php");
+$erreur_eval = "";
+
+if (isset($_POST["confirmer_eval"])){
+    if (isset($_POST["eval"])){
+        $sql = "SELECT * FROM evaluation WHERE ID_etu LIKE '$ID_ut' AND ID_comp LIKE '$ID_comp'";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) == 1){
+            $note = "";
+            switch ($_POST["eval"]) {
+                case "comp_na": $note = "na" ; break;
+                case "comp_eca": $note = "eca" ; break;
+                case "comp_a": $note = "a" ; break;
+            }
+            if ($note != ""){
+                $sql = "UPDATE evaluation SET deja_evaluee = 'oui', note = '$note', confirme = 'non' WHERE ID_etu LIKE '$ID_ut' AND ID_comp LIKE '$ID_comp'";
+                $result = mysqli_query($conn, $sql);
+                header("Location: detailcompetence.php");
+                die();
+            }
+        }
+    } else { $erreur_eval = "Saisissez une evaluation<br>"; }
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,8 +46,42 @@ require("blocs/config.php");
 </head>
 <body>
     <?php require("blocs/header.php"); ?>
-    <div><br><?php echo $_SESSION['nom_comp'] ?><br><br></div>
-    <div></div>
+    <br><div><?php echo $_SESSION['nom_comp'] ?></div>
+    
+    <?php
+    if ($_SESSION['statut'] == "etu"){
+        $sql = "SELECT * FROM evaluation WHERE ID_etu LIKE '$ID_ut' AND ID_comp LIKE '$ID_comp'";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) == 1){ ?>
+            <br><div>Dernière évaluation : 
+            <?php $data = mysqli_fetch_assoc($result);
+            if ($data['deja_evaluee'] == "oui"){
+                switch ($data['note']) {
+                    case "na": echo "non-acquis"; break;
+                    case "eca": echo "en cours d'acquisition"; break;
+                    case "a": echo "acquis"; break;
+                    default : echo "aucune évaluation";
+                }
+            } else if ($data['deja_evaluee'] == "non"){
+                echo "aucune évaluation";
+            }
+            ?></div><?php
+        }
+    } ?>
+
+    <?php if ($_SESSION['statut'] == "etu"){ ?>
+        <br><div>
+            <form method="post" action="">
+                Evaluation :<br>
+                <input type="radio" name="eval" value="comp_na"><label for="comp_na">Non-acquis</label><br>
+                <input type="radio" name="eval" value="comp_eca"><label for="comp_eca">En cours d'acquisition</label><br>
+                <input type="radio" name="eval" value="comp_a"><label for="comp_a">Acquis</label><br>
+                <input type="submit" name="confirmer_eval" value="Confirmer l'auto-évaluation"><br>
+                <?php echo $erreur_eval ?>
+            </form>
+        </div>
+    <?php } ?>
+    
 </body>
 </html>
 
