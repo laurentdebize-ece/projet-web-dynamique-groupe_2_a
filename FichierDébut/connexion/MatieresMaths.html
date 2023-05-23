@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ma page d'acceuil</title>
+	<style>
+		body {
+			background-color: #013A89; /* Couleur de fond de la page */
+		}
+		/* Style pour le menu déroulant */
+		.dropdown {
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: inline-block;
+			margin: 10px;
+			background-color: #fff; /* Couleur de fond du menu */
+			box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+			border-radius: 5px;
+		}
+		.dropdown button {
+			background-color: transparent;
+			color: #333;
+			border: none;
+			padding: 10px;
+			font-size: 16px;
+			cursor: pointer;
+			outline: none;
+		}
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			left: 0;
+			top: 100%;
+			z-index: 1;
+			min-width: 160px;
+			background-color: #fff; /* Couleur de fond du menu déroulant */
+			box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+			border-radius: 5px;
+		}
+		.dropdown-content a {
+			color: #333;
+			padding: 10px;
+			display: block;
+			text-align: left;
+			text-decoration: none;
+			font-size: 16px;
+			border-bottom: 1px solid #ccc;
+		}
+		.dropdown-content a:active {
+			background-color: #e1e1e1; /* Couleur de fond du thème sélectionné */
+		}
+		.dropdown:hover .dropdown-content {
+			display: block;
+		}
+		/* Style pour la barre de déconnexion */
+		.logout {
+			position: absolute;
+			top: 0;
+			right: 0;
+			display: flex;
+			align-items: center;
+			margin: 10px;
+			background-color: #ffffff; /* Couleur de fond de la barre de déconnexion */
+			padding: 10px;
+			border-radius: 5px;
+		}
+		.logout a {
+			color: #000000;
+			text-decoration: none;
+			font-size: 16px;
+			font-weight: bold;
+			margin-left: 10px;
+		}
+		.logout img {
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			object-fit: cover;
+			margin-right: 10px;
+		}
+		body {
+			background-color: #6D7CAA; /* Couleur de fond de la page */
+			font-family: Arial, sans-serif; /* Police de caractères */
+			color: #333; /* Couleur du texte */
+			line-height: 1.5; /* Hauteur de ligne */
+		}
+		h1 {
+			font-size: 40px; /* Taille du titre */
+			margin: 20px 0; /* Marge autour du titre */
+			text-align: center; /* Alignement du titre */
+		}
+		p {
+			font-size: 16px; /* Taille du texte */
+			margin: 20px; /* Marge autour du texte */
+			text-align: justify; /* Justification du texte */
+		}
+		img {
+			max-width: 50%; /* Taille maximale de l'image */
+			display: block; /* Centrer l'image dans le texte */
+			margin: 20px auto; /* Marge autour de l'image */
+		}
+	</style>
+</head>
+<body>
+	<!-- Barre de déconnexion -->
+	<div class="logout">
+		<img src="profil.jpg" alt="Mon profil">
+		<a href="connexion.html">Deconnexion</a>
+	</div>
+	<!-- Menu déroulant -->
+	<div class="dropdown">
+		<button><img src="menu.jpg" alt="Menu"></button>
+		<div class="dropdown-content">
+			<a href="Acceuil.html">Acceuil</a>
+			<a href="matieres.html">Matieres</a>
+			<a href="Competence.html">Mes competences</a>
+			<a href="#">Toutes competences</a>
+		</div>
+	</div>
+</body>
+</html>
+
+	
