@@ -11,7 +11,6 @@
 </head>
 <body>
     <?php require("blocs/header.php"); ?>
-    <div><br>Accueil<br><br></div>
 </body>
 </html>
 
